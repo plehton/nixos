@@ -1,4 +1,4 @@
-{ pkgs, stdenv, userName, ... } :
+{ pkgs, stdenv, user, ... } :
 let
   isDarwin = pkgs.stdenv.isDarwin;
 in
@@ -6,8 +6,8 @@ in
 
   programs.home-manager.enable = true;
 
-  home.username = userName;
-  home.homeDirectory = (if isDarwin then "/Users/" else "/home/") + userName;
+  home.username = user;
+  home.homeDirectory = (if isDarwin then "/Users/" else "/home/") + user;
 
   programs.git = {
     enable = true;

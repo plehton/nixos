@@ -3,24 +3,38 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    darwin.url = "github:LnL7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    darwin = {
+        url = "github:LnL7/nix-darwin";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Use my dotfiles as input
+    dotfiles = {
+      url = "github:plehton/dotfiles";
+      flake = false;
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, darwin, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, darwin, dotfiles, ... }:
   let
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.aarch64-linux;
-    userName = "pjl";
-    userRealName = "Petri Lehtonen";
+    user = "pjl";
+    userName = "Petri Lehtonen";
   in {
     # Macbook
     darwinConfigurations.MV9J7YK4N9 = darwin.lib.darwinSystem rec {
       specialArgs = {
-        inherit userName;
+        inherit user;
       };
       modules = [
         ./system/darwin.nix
@@ -29,7 +43,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = specialArgs;
-              users.${userName}.imports = [ ./home-manager.nix ];
+              users.${user}.imports = [ ./home-manager.nix ];
             };
           }
       ];
@@ -39,8 +53,8 @@
     nixosConfigurations.utmos = lib.nixosSystem rec {
       specialArgs = {
         hostName = "utmos";
+        inherit user;
         inherit userName;
-        inherit userRealName;
       };
       system = "aarch64-linux";
       modules = [
@@ -50,7 +64,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.${userName}.imports = [ ./home-manager.nix ];
+            users.${user}.imports = [ ./home-manager.nix ];
             extraSpecialArgs = specialArgs;
           };
         }

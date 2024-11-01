@@ -1,4 +1,4 @@
-{ pkgs, userName, ... }:
+{ pkgs, user, ... }:
 {
 	nixpkgs.hostPlatform = "aarch64-darwin";
 	services.nix-daemon.enable = true;
@@ -9,10 +9,8 @@
 	programs.zsh.enable = true; # default shell on catalina
 
 	users.users.pjl = {
-    home = "/Users/${userName}";
-    packages = with pkgs; [
-      karabiner-elements 
-      ];
+          home = "/Users/${user}";
+          packages = with pkgs; [ ];
     };
 
   environment.pathsToLink = [ "/share/zsh" ];

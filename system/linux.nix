@@ -1,4 +1,4 @@
-{ config, pkgs, userName, userRealName, hostName, ... }:
+{ config, pkgs, user, userName, hostName, ... }:
 
 {
   # Bootloader.
@@ -15,14 +15,14 @@
   programs.zsh.enable = true;
   environment.shells = [ pkgs.bash pkgs.zsh ];
 
-  users.users.${userName}= {
+  users.users.${user}= {
     isNormalUser = true;
-    description = userRealName;
+    description = userName;
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  nix.settings.trusted-users = [ "root" userName ];
+  nix.settings.trusted-users = [ "root" user ];
 
   environment.pathsToLink = [ "/share/zsh" ];
 
