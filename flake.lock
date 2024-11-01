@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729174561,
+        "narHash": "sha256-vmPzQJ4ut6msd+ZzgsADri2ovys5HBbx+ro10y32QXI=",
+        "owner": "plehton",
+        "repo": "dotfiles",
+        "rev": "815c97347e9f37cf28f6a91a63355700bd9f78f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "plehton",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -129,6 +145,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2"
