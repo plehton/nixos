@@ -20,8 +20,8 @@ local colorschemes = {
 
 config.front_end = 'WebGpu'
 
-config.font = wezterm.font('FiraCode', { weight = 'Regular' })
-config.font_size = 15
+config.font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'ExtraLight' })
+config.font_size = 16
 
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
