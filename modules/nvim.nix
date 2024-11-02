@@ -1,4 +1,4 @@
-{...} : {
+{ inputs, ... } : {
   programs = {
     neovim = {
       enable = true;
@@ -14,7 +14,7 @@
     ".config/nvim" = {
         enable = true;
         recursive = true;
-        source = ../config/nvim;
+        source = "${inputs.dotfiles}/nvim";
     };
   };
 }

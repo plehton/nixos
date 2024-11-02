@@ -1,4 +1,4 @@
-{ pkgs, stdenv, user, ... } :
+{ inputs, pkgs, user, ... } :
 let
   isDarwin = pkgs.stdenv.isDarwin;
 in
