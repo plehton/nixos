@@ -2,6 +2,7 @@
   description = "Petri's NixOS";
 
   inputs = {
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
@@ -30,52 +31,51 @@
       user = "pjl";
       userName = "Petri Lehtonen";
     in {
+
       # Macbook
       darwinConfigurations.MV9J7YK4N9 = darwin.lib.darwinSystem rec {
         specialArgs = {
           inherit user;
           inherit inputs;
+          inherit self;
         };
         modules = [
-
-          ./system/darwin.nix
-
+          ./hosts/macbook
           home-manager.darwinModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = specialArgs;
-              users.${user}.imports = [ ./home-manager.nix ];
+              backupFileExtension = "oli";
+              users.${user}.imports = [ ./home ];
             };
           }
-
         ];
       };
 
       # UTM VM
-      nixosConfigurations.utmos = lib.nixosSystem rec {
+      nixosConfigurations.utmos= lib.nixosSystem rec {
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         specialArgs = {
-          hostName = "utmos";
+          inherit self;
+          inherit inputs;
           inherit user;
           inherit userName;
-          inherit inputs;
         };
         system = "aarch64-linux";
         modules = [
-          ./hardware/aarch64utm.nix
-          ./system/linux.nix
-
-          home-manager.nixosModules.home-manager {
+          ./hosts/utm
+          .home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.${user}.imports = [ ./home-manager.nix ];
+              backupFileExtension = "oli";
+              users.${user}.imports = [ ./home ];
               extraSpecialArgs = specialArgs;
             };
           }
-
         ];
       };
+
     };
 }

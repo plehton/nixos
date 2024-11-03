@@ -1,11 +1,11 @@
 { config, pkgs, user, userName, hostName, ... }:
 
 {
-  # Bootloader.
+  imports = [ ./hardware-configuration.nix; ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Define hostname
   networking.hostName = hostName;
 
   # Enable networking

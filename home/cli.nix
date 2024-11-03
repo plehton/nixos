@@ -1,4 +1,5 @@
 { pkgs, ... } : {
+
   programs = {
     bat.enable = true;
     direnv = {
@@ -14,21 +15,31 @@
     gh = {
       enable = true;
     };
-    tmux = {
-      enable = true;
-      prefix = "C-a";
-      baseIndex = 1;
-      clock24 = true;
-      historyLimit = 10000;
-      keyMode = "vi";
-      terminal = "xterm-256color";
-      extraConfig = "set -g default-command ${pkgs.zsh}/bin/zsh";
-    };
     z-lua = {
       enable = true;
       enableZshIntegration = true;
       options = [ "once" "fzf" ];
     };
   };
+
+  home.packages = with pkgs; [
+
+    # Base
+    (nerdfonts.override { fonts = [ "BitstreamVeraSansMono" "FiraCode" "JetBrainsMono" ]; })
+    curl
+    fd
+    lazygit
+    ripgrep
+    tree
+
+    # Work
+    awscli2
+    fswatch
+    databricks-cli
+    jq
+
+    # Dev
+    devenv
+  ];
 
 }
