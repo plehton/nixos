@@ -17,16 +17,17 @@
       searchUpKey = [ "^[[A" "^P" ];
       searchDownKey = ["^[[B" "^N" ];
     };
-    localVariables = {};
     shellGlobalAliases = {
       CP = "|pbcopy";
       FZF = "|fzf";
+      BAT = "|bat";
     };
     shellAliases = {
       ls = "ls --color=tty";
       l = "ls -al";
       ll = "ls -l";
       cl = "clear";
+      myip = "echo -n $(curl -s ipinfo.io/ip) | pbcopy";
     };
     syntaxHighlighting.enable = true;
 
