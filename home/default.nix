@@ -21,9 +21,6 @@ in
     ./nvim.nix
   ];
 
-  home.packages = with pkgs; [
-  ];
-
   home.stateVersion = "24.05";
 }
 

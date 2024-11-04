@@ -31,6 +31,7 @@
     lazygit
     ripgrep
     tree
+    stow
 
     # Work
     awscli2
