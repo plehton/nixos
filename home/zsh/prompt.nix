@@ -8,15 +8,15 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' use-simple true
 zstyle ':vcs_info:*' formats '%F{08}[%b%m%c%u%F{08}]'
-zstyle ':vcs_info:*' stagedstr "%F{green}󰁞" # default 'S'
-zstyle ':vcs_info:*' unstagedstr "%F{yellow}✘" # default 'U'
+zstyle ':vcs_info:*' stagedstr "%F{green}•" # default 'S'
+zstyle ':vcs_info:*' unstagedstr "%F{yellow}•" # default 'U'
 zstyle ':vcs_info:git*:*' actionformats '%F{08}[%b|%F{yellow}%a%F{08}]'
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked
 
 function +vi-git-untracked() {
 emulate -L zsh
 if [[ -n $(git ls-files --exclude-standard --others 2> /dev/null) ]]; then
-  hook_com[unstaged]+="%F{red}󱈸%f"
+  hook_com[unstaged]+="%F{red}•%f"
 fi
 }
 
@@ -108,7 +108,7 @@ function -maybe-show-vcs-info() {
   # Check first word; via:
   # http://tim.vanwerkhoven.org/post/2012/10/28/ZSH/Bash-string-manipulation
   case "$LAST[(w)1]" in
-    cd|cp|git|rm|touch|mv)
+    git|rm|touch|mv|cp)
       vcs_info
       ;;
     *)
@@ -116,6 +116,12 @@ function -maybe-show-vcs-info() {
   esac
 }
 add-zsh-hook precmd -maybe-show-vcs-info
+
+# If entering directory in a git repo, show vcs info for that repo
+add-zsh-hook chpwd -show-vcs-info-when-entering-git-dir() {
+        git rev-parse --is-inside-work-tree && vcs_info
+    }
+add-zsh-hook chpwd -show-vcs-info-when-entering-git-dir()
 
 # Call vcs_info when sourcing this file so we update git status after starting
 # a new shell

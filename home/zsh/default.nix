@@ -31,7 +31,7 @@
     };
     syntaxHighlighting.enable = true;
 
-    initExtra = builtins.readFile ./zsh.init;
+    initExtra = builtins.readFile ./prompt.nix;
 
     completionInit = /* bash */''
       autoload -Uz compinit

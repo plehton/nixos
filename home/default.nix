@@ -13,7 +13,7 @@ in
   xdg.enable = true;
 
   imports = [
-    ./zsh.nix
+    ./zsh
     ./git.nix
     ./tmux.nix
     ./cli.nix
