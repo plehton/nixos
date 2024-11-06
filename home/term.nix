@@ -3,18 +3,14 @@
     programs = {
         kitty = {
             enable = true;
+            settings = {
+                font_family = "family='JetBrainsMono Nerd Font Mono' style=Light";
+                font_size = 15;
+            };
+            themeFile = "rose-pine";
         };
-    };
-
-    home.packages = [
-    	pkgs.wezterm
-    ];
-
-    xdg.configFile = {
-        "wezterm" = {
+        wezterm = {
             enable = true;
-            recursive = true;
-            source = config.lib.file.mkOutOfStoreSymlink "${self.outPath}/home/config/wezterm";
         };
     };
 
