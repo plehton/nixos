@@ -6,10 +6,10 @@
             settings = {
                 font_family = "family='JetBrainsMono Nerd Font Mono' style=Thin";
                 font_size = 15;
+                disable_ligatures = "always";
+                macos_option_as_alt = "left";
             };
             themeFile = "rose-pine";
-            # macos_option_as_alt = true;
         };
     };
-
 }
