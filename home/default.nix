@@ -1,10 +1,13 @@
-{ self, inputs, config, pkgs, user, ... } :
+{ self, inputs, pkgs, user, ... } :
 let
   isDarwin = pkgs.stdenv.isDarwin;
 in
   {
 
   programs.home-manager.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = "_";
 
   home.username = user;
   home.homeDirectory = (if isDarwin then "/Users/" else "/home/") + user;
@@ -13,12 +16,12 @@ in
   xdg.enable = true;
 
   imports = [
-    ./zsh
-    ./git.nix
-    ./tmux.nix
     ./cli.nix
+    ./git.nix
     ./kitty.nix
     ./nvim.nix
+    ./tmux.nix
+    ./zsh
   ];
 
   home.stateVersion = "24.05";

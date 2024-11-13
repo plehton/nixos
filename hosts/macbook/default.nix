@@ -8,9 +8,8 @@
     environment.shells = [ pkgs.bash pkgs.zsh ];
     programs.zsh.enable = true; # default shell on catalina
 
-    users.users.pjl = {
+    users.users.${user} = {
         home = "/Users/${user}";
-        packages = with pkgs; [ ];
     };
 
     environment.pathsToLink = [ "/share/zsh" ];
@@ -18,6 +17,17 @@
         git
         vim
     ];
+    environment.etc.vimrc.text = ''
+        syntax on
+        filetype indent plugin on
+        nmap , :
+        set tabstop=4
+        set shiftwidth=4
+        set softtabstop=4
+        set expandtab
+        set autoindent
+        '';
+
 
     # MacOS Settings
     security.pam.enableSudoTouchIdAuth = true;

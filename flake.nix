@@ -41,14 +41,6 @@
                 };
                 modules = [
                     ./hosts/macbook
-                    home-manager.darwinModules.home-manager {
-                      home-manager = {
-                        useGlobalPkgs = true;
-                        useUserPackages = true;
-                        extraSpecialArgs = specialArgs;
-                        users.${user}.imports = [ ./home ];
-                      };
-                    }
                 ];
             };
 
@@ -62,17 +54,16 @@
                     inherit userName;
                 };
                 system = "aarch64-linux";
-                modules = [ ./hosts/utm
-                    .home-manager.nixosModules.home-manager {
-                      home-manager = {
-                        useGlobalPkgs = true;
-                        useUserPackages = true;
-                        users.${user}.imports = [ ./home ];
-                        extraSpecialArgs = specialArgs;
-                      };
-                    }
-                ];
+                modules = [ ./hosts/utm ];
             };
 
-};
+            homeConfigurations = {
+                "pjl@MV9J7YK4N9" = home-manager.lib.homeManagerConfiguration {
+                    pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+                    extraSpecialArgs = {inherit self inputs user userName;};
+                    modules = [ ./home ];
+                };
+
+            };
+        };
 }
