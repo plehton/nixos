@@ -4,13 +4,11 @@
         kitty = {
             enable = true;
             settings = {
-                font_family = "family='JetBrainsMono Nerd Font Mono' style=Light";
+                font_family = "family='JetBrainsMono Nerd Font Mono' style=Thin";
                 font_size = 15;
             };
             themeFile = "rose-pine";
-        };
-        wezterm = {
-            enable = true;
+            # macos_option_as_alt = true;
         };
     };
 

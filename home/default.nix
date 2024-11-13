@@ -17,7 +17,7 @@ in
     ./git.nix
     ./tmux.nix
     ./cli.nix
-    ./term.nix
+    ./kitty.nix
     ./nvim.nix
   ];
 
