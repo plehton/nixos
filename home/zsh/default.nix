@@ -35,7 +35,7 @@
 
     completionInit = /* bash */''
       autoload -Uz compinit
-      if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
+      if [ $(date +'%s') != $(stat --format '%Y' $HOME/.zcompdump) ]; then
         compinit
       else
         compinit -C

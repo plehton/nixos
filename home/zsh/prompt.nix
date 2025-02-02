@@ -41,11 +41,22 @@ function shell_level() {
   echo ${level_string}
 }
 
+function get_hostname() {
+  local HOST
+  if [[ -n $SSH_TTY ]]
+  then
+    echo "$(hostname):"
+  else
+    echo ""
+  fi
+}
+
+local HOST=$(get_hostname)
 local RPATH='$(rprompt_path)'
 export PS_SHLVL='$(shell_level)'
 export RPROMPT_BASE="\${vcs_info_msg_0_}%F{blue}${RPATH}%f"
 export RPROMPT=$RPROMPT_BASE
-export PS1="%F{green}\${VENV_INFO}%F{blue}%1~%F{red} ${PS_SHLVL}%f "
+export PS1="%F{green}\${VENV_INFO}%F{yellow}$(get_hostname)%F{blue}%1~%F{red} ${PS_SHLVL}%f "
 
 
 # Set up shell hooks for prompt

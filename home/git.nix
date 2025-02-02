@@ -13,17 +13,10 @@
         extraConfig = {
             core = {
                 excludeFile = "$HOME/.gitignore";
-                editor = "nvim";
+                editor = "vim";
             };
             merge = {
-                tool = "nvim";
-            };
-            mergetool = {
-                nvim = { cmd = "nvim -f -c \"Gdiffsplit!\" \"$MERGED\""; };
-                prompt = false;
-            };
-            credential = {
-                helper = "osxkeychain";
+                tool = "vim";
             };
             pull = {
                 rebase = true;
